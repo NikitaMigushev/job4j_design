@@ -1,7 +1,8 @@
-package assertj;
+package ru.job4j.assertj;
 
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
+import ru.job4j.assertj.Box;
 
 import static org.assertj.core.api.Assertions.withPrecision;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

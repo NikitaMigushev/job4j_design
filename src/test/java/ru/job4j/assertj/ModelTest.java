@@ -1,11 +1,11 @@
-package assertj;
+package ru.job4j.assertj;
 
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
+import ru.job4j.assertj.Model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ModelTest {
     @Test

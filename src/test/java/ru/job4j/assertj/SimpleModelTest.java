@@ -1,9 +1,9 @@
-package assertj;
+package ru.job4j.assertj;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.assertj.SimpleModel;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class SimpleModelTest {
     @Test
