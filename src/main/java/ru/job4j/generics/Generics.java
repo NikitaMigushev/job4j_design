@@ -3,8 +3,6 @@ package ru.job4j.generics;
 import java.util.*;
 
 public class Generics {
-
-
     public static void main(String[] args) {
         Generics gen = new Generics();
         List<Animal> first = new ArrayList<>();
@@ -19,12 +17,14 @@ public class Generics {
         gen.printObject(third);
         System.out.println();
 
+//        gen.printBoundedWildCard(first);
         gen.printBoundedWildCard(second);
         gen.printBoundedWildCard(third);
         System.out.println();
 
         gen.printLowerBoundedWildCard(first);
         gen.printLowerBoundedWildCard(second);
+//        gen.printLowerBoundedWildCard(third);
     }
 
     public void printObject(Collection<?> list) {
