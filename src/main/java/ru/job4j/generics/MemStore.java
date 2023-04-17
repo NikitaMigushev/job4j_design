@@ -8,34 +8,21 @@ public class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public void add(T model) {
-        if (!storage.containsKey(model.getId())) {
-            storage.put(model.getId(), model);
-        }
+        storage.putIfAbsent(model.getId(), model);
     }
 
     @Override
     public boolean replace(String id, T model) {
-        if (storage.containsKey(id)) {
-            storage.replace(id, model);
-            return true;
-        }
-        return false;
+        return storage.replace(id, findById(id), model);
     }
 
     @Override
     public boolean delete(String id) {
-        if (storage.containsKey(id)) {
-            storage.remove(id);
-            return true;
-        }
-        return false;
+        return storage.remove(id, findById(id));
     }
 
     @Override
     public T findById(String id) {
-        if (storage.containsKey(id)) {
-            return storage.get(id);
-        }
-        return null;
+        return storage.get(id);
     }
 }
