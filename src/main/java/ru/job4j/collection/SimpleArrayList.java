@@ -47,9 +47,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     @Override
     public T set(int index, T newValue) {
         T rsl = container[index];
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        Objects.checkIndex(index, size);
         container[index] = newValue;
         return rsl;
     }
@@ -59,9 +57,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
      */
     @Override
     public T remove(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        Objects.checkIndex(index, size);
         modCount++;
         T result = container[index];
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
@@ -75,9 +71,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
      */
     @Override
     public T get(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        Objects.checkIndex(index, size);
         return container[index];
     }
 
@@ -123,9 +117,6 @@ public class SimpleArrayList<T> implements SimpleList<T> {
             public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
                 }
                 return container[point++];
             }
