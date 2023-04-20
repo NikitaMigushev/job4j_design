@@ -7,7 +7,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     /**
      * Container - array of objects which is initialized with initial capacity.
      * container is dynamic, which means, if there are no empty slots left, a new copy of
-     * araay is created with doubled size.
+     * array is created with doubled size.
      */
     private T[] container;
     /**
@@ -74,7 +74,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     /**
-     * Method gets number of elements added to container.
+     * Method returns number of elements added to container.
      */
     @Override
     public int size() {
