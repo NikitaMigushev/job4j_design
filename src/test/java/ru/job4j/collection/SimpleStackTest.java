@@ -39,4 +39,17 @@ class SimpleStackTest {
         assertThatThrownBy(stack::pop)
                 .isInstanceOf(NoSuchElementException.class);
     }
+
+    @Test
+    void checkIsEmptyTrue() {
+        stack.pop();
+        stack.pop();
+        assertThat(stack.isEmpty()).isTrue();
+    }
+
+    @Test
+    void checkIsEmptyFalse() {
+        stack.pop();
+        assertThat(stack.isEmpty()).isFalse();
+    }
 }
