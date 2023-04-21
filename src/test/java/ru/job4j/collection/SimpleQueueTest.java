@@ -1,4 +1,4 @@
-/*package ru.job4j.collection;
+package ru.job4j.collection;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,4 +60,4 @@ class SimpleQueueTest {
         queue.push(3);
         assertThat(queue.poll()).isEqualTo(2);
     }
-}*/
+}
