@@ -1,4 +1,4 @@
-package ru.job4j.collection;
+/*package ru.job4j.collection;
 
 import java.util.NoSuchElementException;
 
@@ -25,4 +25,4 @@ public class SimpleQueue<T> {
     public boolean isEmpty() {
         return in.isEmpty() && out.isEmpty();
     }
-}
+}*/
