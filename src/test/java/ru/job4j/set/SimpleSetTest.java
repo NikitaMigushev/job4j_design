@@ -37,4 +37,39 @@ class SimpleSetTest {
         assertThat(set.contains(null)).isTrue();
         assertThat(set.add(null)).isFalse();
     }
+
+    @Test
+    void whenContainsValue() {
+        Set<String> set = new SimpleSet<>();
+        set.add("one");
+        set.add("two");
+        set.add("three");
+        assertThat(set.contains("two")).isTrue();
+    }
+
+    @Test
+    void whenNotContainsValue() {
+        Set<String> set = new SimpleSet<>();
+        set.add("one");
+        set.add("two");
+        set.add("three");
+        assertThat(set.contains("fout")).isFalse();
+    }
+
+    @Test
+    void whenContainsNull() {
+        Set<String> set = new SimpleSet<>();
+        set.add("one");
+        set.add("two");
+        set.add(null);
+        assertThat(set.contains(null)).isTrue();
+    }
+
+    @Test
+    void whenNotContainsNull() {
+        Set<String> set = new SimpleSet<>();
+        set.add("one");
+        set.add("two");
+        assertThat(set.contains(null)).isFalse();
+    }
 }
