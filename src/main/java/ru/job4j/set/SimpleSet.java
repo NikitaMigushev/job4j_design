@@ -22,8 +22,8 @@ public class SimpleSet<T> implements Set<T> {
         boolean rsl = false;
         for (int i = 0; i < set.size(); i++) {
             T element = set.get(i);
-            if ((value == null && element == null) ||
-                    (value != null && value.equals(element))) {
+            if ((value == null && element == null)
+                    || (value != null && value.equals(element))) {
                 rsl = true;
             }
         }
