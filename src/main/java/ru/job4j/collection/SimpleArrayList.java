@@ -32,11 +32,11 @@ public class SimpleArrayList<T> implements SimpleList<T> {
      */
     @Override
     public void add(T value) {
-        modCount++;
         if (size == container.length) {
             container = grow();
         }
         container[size] = value;
+        modCount++;
         size++;
     }
 
