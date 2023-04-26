@@ -15,7 +15,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean put(K key, V value) {
         boolean rsl = false;
-        if (1f * count / capacity >= LOAD_FACTOR) {
+        if (capacity * LOAD_FACTOR <= count) {
             expand();
         }
         int index = indexForKey(key);
@@ -37,8 +37,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int indexForKey(K key) {
-        int hashCode = (key == null) ? 0 : key.hashCode();
-        return indexFor(hash(hashCode));
+        return indexFor(hash(Objects.hashCode(key)));
 
     }
 
@@ -86,9 +85,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
      * @return boolean
      */
     private boolean compareKeys(K key, K compareToKey) {
-        int keyHashCode = key == null ? 0 : key.hashCode();
-        int compareToKeyHashCode = compareToKey == null ? 0 : compareToKey.hashCode();
-        return keyHashCode == compareToKeyHashCode && Objects.equals(key, compareToKey);
+        return Objects.hashCode(key) == Objects.hashCode(compareToKey) && Objects.equals(key, compareToKey);
     }
 
     @Override
