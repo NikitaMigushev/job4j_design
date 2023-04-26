@@ -42,6 +42,18 @@ class SimpleMapTest {
     }
 
     @Test
+    void whenPutTrue() {
+        assertThat(map.put(5, "4")).isTrue();
+    }
+
+    @Test
+    void whenPutFalse() {
+        assertThat(map.put(1, "4")).isFalse();
+    }
+
+
+
+    @Test
     void whenCheckRemove() {
         assertThat(map.remove(2)).isTrue();
         assertThat(map).hasSize(3);
@@ -49,6 +61,26 @@ class SimpleMapTest {
         assertThat(map).hasSize(3);
         assertThat(map.remove(5)).isFalse();
         assertThat(map).hasSize(3);
+    }
+
+    @Test
+    void whenGetSuccess() {
+       assertThat(map.get(1)).isEqualTo("1");
+    }
+
+    @Test
+    void whenGetFails() {
+        assertThat(map.get(5)).isNull();
+    }
+
+    @Test
+    void whenRemoveTrue() {
+        assertThat(map.remove(1)).isTrue();
+    }
+
+    @Test
+    void whenRemoveFalse() {
+        assertThat(map.remove(6)).isFalse();
     }
 
     @Test
