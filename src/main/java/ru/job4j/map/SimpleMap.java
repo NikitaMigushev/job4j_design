@@ -87,7 +87,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
      */
     private boolean compareKeys(K key, K compareToKey) {
         int keyHashCode = key == null ? 0 : key.hashCode();
-        int compareToKeyHashCode = key == null ? 0 : key.hashCode();
+        int compareToKeyHashCode = compareToKey == null ? 0 : compareToKey.hashCode();
         return keyHashCode == compareToKeyHashCode && Objects.equals(key, compareToKey);
     }
 
