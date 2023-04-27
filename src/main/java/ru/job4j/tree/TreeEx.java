@@ -6,12 +6,12 @@ public class TreeEx<T> {
     private T value;
     private List<TreeEx<T>> children;
 
-    private TreeEx (T value) {
+    private TreeEx(T value) {
         this.value = value;
         this.children = new ArrayList<>();
     }
 
-    public static <T> TreeEx<T> of (T value) {
+    public static <T> TreeEx<T> of(T value) {
         return new TreeEx<>(value);
     }
 
@@ -21,7 +21,7 @@ public class TreeEx<T> {
         return newChild;
     }
 
-    public static<T>Optional<TreeEx<T>> search(T value, TreeEx<T> root) {
+    public static <T> Optional<TreeEx<T>> search(T value, TreeEx<T> root) {
         Queue<TreeEx<T>> queue = new ArrayDeque<>();
         queue.add(root);
         while (!queue.isEmpty()) {
