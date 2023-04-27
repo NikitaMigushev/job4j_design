@@ -54,16 +54,4 @@ public class SimpleTree<E> implements Tree<E> {
         Predicate<Node<E>> predicate = el -> el.children.size() > 2;
         return findByPredicate(predicate).isEmpty();
     }
-
-    private List<Node<E>> traverseTree() {
-        List<Node<E>> nodes = new ArrayList<>();
-        Queue<Node<E>> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            Node<E> node = queue.poll();
-            nodes.add(node);
-            queue.addAll(node.children);
-        }
-        return nodes;
-    }
 }
