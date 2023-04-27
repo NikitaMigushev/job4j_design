@@ -12,6 +12,7 @@ public class SimpleTree<E> implements Tree<E> {
     /**
      * Method finds Node by parent and adds child Node. If child already exists then false,
      * otherwise true.
+     *
      * @param parent - Node that we are looking for
      * @param child  - Node that we add as a child to parent Node
      * @return boolean
@@ -30,15 +31,12 @@ public class SimpleTree<E> implements Tree<E> {
     @Override
     public Optional<Node<E>> findBy(E value) {
         Optional<Node<E>> rsl = Optional.empty();
-        Queue<Node<E>> data = new LinkedList<>();
-        data.offer(this.root);
-        while (!data.isEmpty()) {
-            Node<E> el = data.poll();
-            if (el.value.equals(value)) {
-                rsl = Optional.of(el);
+        List<Node<E>> nodes = traverseTree();
+        for (Node<E> node : nodes) {
+            if (node.value.equals(value)) {
+                rsl = Optional.of(node);
                 break;
             }
-            data.addAll(el.children);
         }
         return rsl;
     }
