@@ -14,7 +14,6 @@ public class SimpleTree<E> implements Tree<E> {
     /**
      * Method finds Node by parent and adds child Node. If child already exists then false,
      * otherwise true.
-     *
      * @param parent - Node that we are looking for
      * @param child  - Node that we add as a child to parent Node
      * @return boolean
