@@ -21,9 +21,9 @@ public class SimpleTree<E> implements Tree<E> {
     @Override
     public boolean add(E parent, E child) {
         boolean rsl = false;
-        if (!findBy(child).isPresent() && findBy(parent).isPresent()) {
-            Node<E> parentN = findBy(parent).get();
-            parentN.children.add(new Node<>(child));
+        Optional<Node<E>> parentN = findBy(parent);
+        if (parentN.isPresent() && !findBy(child).isPresent()) {
+            parentN.get().children.add(new Node<>(child));
             rsl = true;
         }
         return rsl;
@@ -43,5 +43,9 @@ public class SimpleTree<E> implements Tree<E> {
             data.addAll(el.children);
         }
         return rsl;
+    }
+
+    public boolean isBinary() {
+        return false;
     }
 }
