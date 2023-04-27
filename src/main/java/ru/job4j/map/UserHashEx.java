@@ -26,7 +26,7 @@ public class UserHashEx {
         return children == user.children && Objects.equals(name, user.name) && Objects.equals(birthday, user.birthday);
     }
 
-    private int hashCode; //Автоматически инициализируется значением 0
+    private int hashCode;
 
     @Override
     public int hashCode() {
