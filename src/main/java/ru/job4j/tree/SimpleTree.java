@@ -1,6 +1,7 @@
 package ru.job4j.tree;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
@@ -28,29 +29,30 @@ public class SimpleTree<E> implements Tree<E> {
         return rsl;
     }
 
-    @Override
-    public Optional<Node<E>> findBy(E value) {
+    public Optional<Node<E>> findByPredicate(Predicate<Node<E>> condition) {
         Optional<Node<E>> rsl = Optional.empty();
-        List<Node<E>> nodes = traverseTree();
-        for (Node<E> node : nodes) {
-            if (node.value.equals(value)) {
-                rsl = Optional.of(node);
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> el = data.poll();
+            if (condition.test(el)) {
+                rsl = Optional.of(el);
                 break;
             }
+            data.addAll(el.children);
         }
         return rsl;
     }
 
+    @Override
+    public Optional<Node<E>> findBy(E value) {
+        Predicate<Node<E>> predicate = el -> el.value.equals(value);
+        return findByPredicate(predicate);
+    }
+
     public boolean isBinary() {
-        boolean rsl = true;
-        List<Node<E>> nodes = traverseTree();
-        for (Node<E> node : nodes) {
-            if (node.children.size() > 2) {
-                rsl = false;
-                break;
-            }
-        }
-        return rsl;
+        Predicate<Node<E>> predicate = el -> el.children.size() > 2;
+        return findByPredicate(predicate).isEmpty();
     }
 
     private List<Node<E>> traverseTree() {
