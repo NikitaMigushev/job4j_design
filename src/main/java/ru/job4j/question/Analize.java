@@ -20,7 +20,6 @@ public class Analize {
             Set<User> curr = new HashSet(current);
             prev.removeAll(current);
             curr.removeAll(previous);
-            System.out.println("check");
             for (User user : prev) {
                 Optional<User> searchUser = findById(user.getId(), curr);
                 if (!searchUser.isEmpty()) {
