@@ -13,13 +13,13 @@ public class Analize {
      */
     public static Info diff(Set<User> previous, Set<User> current) {
         Info info = new Info(0, 0, 0);
-        Map<Integer, String> prevMap = createMap(previous);
-        Map<Integer, String> currMap = createMap(current);
+        Map<Integer, User> prevMap = createMap(previous);
+        Map<Integer, User> currMap = createMap(current);
 
         if (!prevMap.equals(currMap) || !currMap.equals(prevMap)) {
-            Iterator<Map.Entry<Integer, String>> prevIterator = prevMap.entrySet().iterator();
+            Iterator<Map.Entry<Integer, User>> prevIterator = prevMap.entrySet().iterator();
             while (prevIterator.hasNext()) {
-                Map.Entry<Integer, String> searchUser = prevIterator.next();
+                Map.Entry<Integer, User> searchUser = prevIterator.next();
                 if (currMap.get(searchUser.getKey()) != null && currMap.get(searchUser.getKey()).equals(searchUser.getValue())) {
                     currMap.remove(searchUser.getKey());
                 } else if (currMap.get(searchUser.getKey()) == null) {
@@ -29,7 +29,7 @@ public class Analize {
                     currMap.remove(searchUser.getKey());
                 }
             }
-            Iterator<Map.Entry<Integer, String>> currIterator = currMap.entrySet().iterator();
+            Iterator<Map.Entry<Integer, User>> currIterator = currMap.entrySet().iterator();
             while (currIterator.hasNext()) {
                 info.setAdded(info.getAdded() + 1);
                 currIterator.next();
@@ -38,10 +38,10 @@ public class Analize {
         return info;
     }
 
-    private static Map<Integer, String> createMap(Set<User> userSet) {
-        Map<Integer, String> map = new HashMap<>();
+    private static Map<Integer, User> createMap(Set<User> userSet) {
+        Map<Integer, User> map = new HashMap<>();
         for (User user : userSet) {
-            map.put(user.getId(), user.getName());
+            map.put(user.getId(), user);
         }
         return map;
     }
