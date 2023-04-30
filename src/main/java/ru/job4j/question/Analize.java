@@ -17,7 +17,6 @@ public class Analize {
         Map<Integer, String> currMap = createMap(current);
 
         if (!prevMap.equals(currMap) || !currMap.equals(prevMap)) {
-            /*Check for deleted*/
             Iterator<Map.Entry<Integer, String>> prevIterator = prevMap.entrySet().iterator();
             while (prevIterator.hasNext()) {
                 Map.Entry<Integer, String> searchUser = prevIterator.next();
