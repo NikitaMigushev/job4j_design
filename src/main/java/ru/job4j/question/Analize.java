@@ -1,8 +1,6 @@
 package ru.job4j.question;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class Analize {
     /**
@@ -15,35 +13,37 @@ public class Analize {
      */
     public static Info diff(Set<User> previous, Set<User> current) {
         Info info = new Info(0, 0, 0);
-        if (!previous.containsAll(current) || !current.containsAll(previous)) {
-            Set<User> prev = new HashSet(previous);
-            Set<User> curr = new HashSet(current);
-            prev.removeAll(current);
-            curr.removeAll(previous);
-            for (User user : prev) {
-                Optional<User> searchUser = findById(user.getId(), curr);
-                if (!searchUser.isEmpty()) {
-                    info.setChanged(info.getChanged() + 1);
-                    curr.remove(searchUser.get());
-                } else {
+        Map<Integer, String> prevMap = createMap(previous);
+        Map<Integer, String> currMap = createMap(current);
+
+        if (!prevMap.equals(currMap) || !currMap.equals(prevMap)) {
+            /*Check for deleted*/
+            Iterator<Map.Entry<Integer, String>> prevIterator = prevMap.entrySet().iterator();
+            while (prevIterator.hasNext()) {
+                Map.Entry<Integer, String> searchUser = prevIterator.next();
+                if (currMap.get(searchUser.getKey()) != null && currMap.get(searchUser.getKey()).equals(searchUser.getValue())) {
+                    currMap.remove(searchUser.getKey());
+                } else if (currMap.get(searchUser.getKey()) == null) {
                     info.setDeleted(info.getDeleted() + 1);
+                } else if (!currMap.get(searchUser.getKey()).equals(searchUser.getValue())) {
+                    info.setChanged(info.getChanged() + 1);
+                    currMap.remove(searchUser.getKey());
                 }
             }
-            for (User user : curr) {
+            Iterator<Map.Entry<Integer, String>> currIterator = currMap.entrySet().iterator();
+            while (currIterator.hasNext()) {
                 info.setAdded(info.getAdded() + 1);
+                currIterator.next();
             }
         }
         return info;
     }
 
-    private static Optional<User> findById(int id, Set<User> userSet) {
-        Optional<User> rsl = Optional.empty();
+    private static Map<Integer, String> createMap(Set<User> userSet) {
+        Map<Integer, String> map = new HashMap<>();
         for (User user : userSet) {
-            if (user.getId() == id) {
-                rsl = Optional.of(user);
-                break;
-            }
+            map.put(user.getId(), user.getName());
         }
-        return rsl;
+        return map;
     }
 }
