@@ -17,7 +17,7 @@ public class LogFilter {
             String[] lines = text.toString().split(System.lineSeparator());
             for (String line : lines) {
                 String[] checkLine = line.split(" ");
-                if (checkLine[checkLine.length - 2].equals("404")) {
+                if ("404".equals(checkLine[checkLine.length - 2])) {
                     rsl.add(line);
                 }
             }
