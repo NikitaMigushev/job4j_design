@@ -24,7 +24,7 @@ public class Config {
             while ((line = in.readLine()) != null) {
                 if (!line.startsWith("#") && !line.startsWith("/") && !"".equals(line)) {
                     String[] keyValue = line.split("=");
-                    if (keyValue.length < 2 || "".equals(keyValue[0]) || "".equals(keyValue[1])) {
+                    if (keyValue.length < 2 || keyValue[0].isBlank() || keyValue[1].isBlank()) {
                         throw new IllegalArgumentException();
                     }
                     values.put(keyValue[0], keyValue[1]);
