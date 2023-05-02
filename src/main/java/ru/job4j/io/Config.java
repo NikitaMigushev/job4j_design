@@ -24,14 +24,10 @@ public class Config {
             while ((line = in.readLine()) != null) {
                 if (!line.startsWith("#") && !line.startsWith("/") && !"".equals(line)) {
                     String[] keyValue = line.split("=");
-                    if (keyValue.length < 2 || "".equals(keyValue[0])) {
+                    if (keyValue.length < 2 || "".equals(keyValue[0]) || "".equals(keyValue[1])) {
                         throw new IllegalArgumentException();
                     }
-                    if (keyValue.length == 2) {
-                        values.put(keyValue[0], keyValue[1]);
-                    } else if (keyValue.length == 3) {
-                        values.put(keyValue[0], keyValue[2]);
-                    }
+                    values.put(keyValue[0], keyValue[1]);
                 }
             }
         } catch (IOException e) {
