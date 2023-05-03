@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+/**
+ * Method read Server log file, filter unavailable status time period and saves to target file.
+ */
 public class Analysis {
     public void unavailable(String source, String target) {
-        /**
-         * Create ArrayList variable
-         * Open read byffer
-         * Read file, filter lines, add them to arraylist
-         * Open out buffer, pass array of logs, and write into a file
-         */
         List<String> log = new ArrayList<>();
         StringJoiner logLine = new StringJoiner(";");
         try (BufferedReader in = new BufferedReader(new FileReader(source))) {
