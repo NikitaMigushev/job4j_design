@@ -12,32 +12,29 @@ public class Analysis {
     public void unavailable(String source, String target) {
         List<String> log = new ArrayList<>();
         StringJoiner logLine = new StringJoiner(";");
-        try (BufferedReader in = new BufferedReader(new FileReader(source))) {
+        try (BufferedReader in = new BufferedReader(new FileReader(source));
+             PrintWriter out = new PrintWriter(
+                     new BufferedOutputStream(
+                             new FileOutputStream(target)
+                     ))) {
             String line;
-            int start = 0;
+            boolean start = false;
             while ((line = in.readLine()) != null) {
                 String[] checkLine = line.split(" ");
-                if (start == 0 && "400".equals(checkLine[0]) || start == 0 && "500".equals(checkLine[0])) {
-                    start = 1;
+                if (start == false && "400".equals(checkLine[0]) || "500".equals(checkLine[0])) {
+                    start = true;
                     logLine.add(checkLine[1]);
-                } else if (start == 1 && !"400".equals(checkLine[0]) || start == 1 && !"500".equals(checkLine[0])) {
-                    start = 0;
+                } else if (start == true) {
+                    start = false;
                     logLine.add(checkLine[1]);
                     log.add(logLine.toString());
                     logLine = new StringJoiner(";");
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try (PrintWriter out = new PrintWriter(
-                new BufferedOutputStream(
-                        new FileOutputStream(target)
-                ))) {
-            for (String line : log) {
-                out.println(line);
+            for (String l : log) {
+                out.println(l);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
