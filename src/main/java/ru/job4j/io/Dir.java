@@ -12,8 +12,7 @@ public class Dir {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsolutePath()));
         }
         for (File subfile : file.listFiles()) {
-            System.out.println(String.format("file name: %s, ", subfile.getName())
-            + String.format("file size: %s", subfile.length()));
+            System.out.println(String.format("file name: %s, file size: %s", subfile.getName(), subfile.length()));
         }
     }
 }
