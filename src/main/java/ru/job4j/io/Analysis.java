@@ -21,10 +21,10 @@ public class Analysis {
             boolean start = false;
             while ((line = in.readLine()) != null) {
                 String[] checkLine = line.split(" ");
-                if (start == false && "400".equals(checkLine[0]) || "500".equals(checkLine[0])) {
+                if (!start && "400".equals(checkLine[0]) || "500".equals(checkLine[0])) {
                     start = true;
                     logLine.add(checkLine[1]);
-                } else if (start == true) {
+                } else if (start) {
                     start = false;
                     logLine.add(checkLine[1]);
                     log.add(logLine.toString());
