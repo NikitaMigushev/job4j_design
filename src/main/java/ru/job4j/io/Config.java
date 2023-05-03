@@ -22,7 +22,7 @@ public class Config {
         try (BufferedReader in = new BufferedReader(new FileReader(this.path))) {
             String line;
             while ((line = in.readLine()) != null) {
-                if (!line.startsWith("#") && !line.startsWith("/") && !"".equals(line)) {
+                if (!line.startsWith("#") && !line.startsWith("/") && !line.isBlank()) {
                     String[] keyValue = line.split("=");
                     if (keyValue.length < 2 || keyValue[0].isBlank() || keyValue[1].isBlank()) {
                         throw new IllegalArgumentException();
