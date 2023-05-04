@@ -21,7 +21,7 @@ public class ArgsName {
         return names;
     }
 
-    private static boolean checkArg (String arg) {
+    private static boolean checkArg(String arg) {
 
         return false;
     }
