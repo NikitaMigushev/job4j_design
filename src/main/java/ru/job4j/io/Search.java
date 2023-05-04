@@ -9,8 +9,12 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(".");
-        search(start, p -> p.toFile().getName().endsWith(".js")).forEach(System.out::println);
+        if (args.length == 0 || args.length < 2) {
+            throw new IllegalArgumentException("Program arguments are missing. First argument is Root folder is missing "
+                    + "or Second argument is file extention to be searched is missing");
+        }
+        Path start = Paths.get(args[0]);
+        search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) {
