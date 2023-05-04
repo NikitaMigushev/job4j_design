@@ -25,9 +25,16 @@ public class Search {
     }
 
     private static void validateArgs(String[] args) {
-        if (args.length == 0 || args.length < 2) {
+        if (args.length < 2) {
             throw new IllegalArgumentException("Program arguments are missing. First argument is Root folder is missing "
                     + "or Second argument is file extention to be searched is missing");
+        }
+        Path path = Paths.get(args[0]);
+        if (!Files.isDirectory(path)) {
+            throw new IllegalArgumentException("First argument Root folder is invalid");
+        }
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException("Second argument File extension is not valid.");
         }
     }
 }
