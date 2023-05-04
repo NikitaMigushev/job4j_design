@@ -9,10 +9,7 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        if (args.length == 0 || args.length < 2) {
-            throw new IllegalArgumentException("Program arguments are missing. First argument is Root folder is missing "
-                    + "or Second argument is file extention to be searched is missing");
-        }
+        validateArgs(args);
         Path start = Paths.get(args[0]);
         search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
@@ -25,5 +22,12 @@ public class Search {
             e.printStackTrace();
         }
         return searcher.getPaths();
+    }
+
+    private static void validateArgs(String[] args) {
+        if (args.length == 0 || args.length < 2) {
+            throw new IllegalArgumentException("Program arguments are missing. First argument is Root folder is missing "
+                    + "or Second argument is file extention to be searched is missing");
+        }
     }
 }
