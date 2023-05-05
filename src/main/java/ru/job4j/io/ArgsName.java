@@ -14,7 +14,8 @@ public class ArgsName {
      */
     public String get(String key) {
         if (values.get(key) == null) {
-            throw new IllegalArgumentException("This key: " + "'" + key + "'" + " is missing");
+            String message = String.format("This key: '%s' is missing", key);
+            throw new IllegalArgumentException(message);
         }
         return values.get(key);
     }
