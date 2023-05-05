@@ -1,30 +1,32 @@
-/*package ru.job4j.io;
+package ru.job4j.io;
+
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.*;
 
 class ArgsNameTest {
 
     @Test
     void whenGetFirst() {
-        ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512", "-encoding=UTF-8"});
+        ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512", "-encoding=UTF-8"});
         assertThat(jvm.get("Xmx")).isEqualTo("512");
     }
 
     @Test
     void whenGetFirstReorder() {
-        ArgsName jvm = ArgsName.of(new String[] {"-encoding=UTF-8", "-Xmx=512"});
+        ArgsName jvm = ArgsName.of(new String[]{"-encoding=UTF-8", "-Xmx=512"});
         assertThat(jvm.get("Xmx")).isEqualTo("512");
     }
 
     @Test
     void whenMultipleEqualsSymbol() {
-        ArgsName jvm = ArgsName.of(new String[] {"-request=?msg=Exit="});
+        ArgsName jvm = ArgsName.of(new String[]{"-request=?msg=Exit="});
         assertThat(jvm.get("request")).isEqualTo("?msg=Exit=");
     }
 
     @Test
     void whenKeyNotExist() {
-        ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512"});
+        ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512"});
         assertThatThrownBy(() -> jvm.get("Xms")).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
                 .hasMessageContaining("This key: 'Xms' is missing");
@@ -32,7 +34,7 @@ class ArgsNameTest {
 
     @Test
     void whenKeyGetNotExist2() {
-        ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512"});
+        ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512"});
         assertThatThrownBy(() -> jvm.get("Xss")).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
                 .hasMessageContaining("This key: 'Xss' is missing");
@@ -93,4 +95,38 @@ class ArgsNameTest {
                 .hasMessageMatching("^.+")
                 .hasMessageContaining("Error: This argument 'request=?msg=Exit=' does not start with a '-' character");
     }
-}*/
+
+    @Test
+    void whenNoKeyExceptionThrown() {
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"-=Value"}))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Error: This argument '-=Value' does not contain a key");
+
+    }
+
+    @Test
+    void whenNoValueExceptionThrown() {
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"-Key="}))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Error: This argument '-Key=' does not contain a value");
+
+    }
+
+    @Test
+    void whenNoEqualSignExceptionThrown() {
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"-KeyValue"}))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Error: This argument '-KeyValue' does not contain an equal sign");
+
+    }
+
+    @Test
+    void whenNoHorizontalLineSignExceptionThrown() {
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"Key=Value"}))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Error: This argument 'Key=Value' does not start with a '-' character");
+
+    }
+
+
+}
