@@ -83,20 +83,8 @@ public class ArgsName {
                 "-out=project.zip", "-encoding=UTF-8"
         });
         System.out.println(zip.get("out"));
-//        ArgsName argsName = ArgsName.of(new String[]{});
         ArgsName anotherArgs = ArgsName.of(new String[]{"-Xmx=512", "-=?msg=Exit="});
 
 
     }
-
-    /**
-     * Program Logic is the following:
-     * User creates ArgsName Object.
-     * Invokes method  of(String[] args), passes array of strings in certain format.
-     * In method of parse method is invoked and parses array into key-vaulue pairs delimiting by
-     * first "-" char and first "=" char. after "-" and before "=" is key, after "=" is value.
-     * Format is checked so that key and value are present. If not, throw exception.
-     * When user wants to retreive value he invokes get method. In get method the string format is checked
-     * and values is retrieved.
-     */
 }
