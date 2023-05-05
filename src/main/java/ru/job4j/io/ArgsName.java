@@ -27,8 +27,6 @@ public class ArgsName {
     private void parse(String[] args) {
         for (String arg : args) {
             checkArg(arg);
-        }
-        for (String arg : args) {
             String[] parseArg = arg.split("=", 2);
             String key = parseArg[0].split("-")[1];
             String value = parseArg[1];
@@ -61,17 +59,21 @@ public class ArgsName {
      */
     private static boolean checkArg(String arg) {
         if (!arg.contains("=")) {
-            throw new IllegalArgumentException("Error: This argument \'" + arg + "\' does not contain an equal sign");
+            String message = String.format("Error: This argument '%s' does not contain an equal sign", arg);
+            throw new IllegalArgumentException(message);
         }
         String[] checkArg = arg.split("=");
         if (!checkArg[0].startsWith("-")) {
-            throw new IllegalArgumentException("Error: This argument \'" + arg + "\' does not start with a '-' character");
+            String message = String.format("Error: This argument '%s' does not start with a '-' character", arg);
+            throw new IllegalArgumentException(message);
         }
         if (checkArg[0].split("-").length < 2) {
-            throw new IllegalArgumentException("Error: This argument \'" + arg + "\' does not contain a key");
+            String message = String.format("Error: This argument '%s' does not contain a key", arg);
+            throw new IllegalArgumentException(message);
         }
         if (checkArg.length < 2) {
-            throw new IllegalArgumentException("Error: This argument \'" + arg + "\' does not contain a value");
+            String message = String.format("Error: This argument '%s' does not contain a value", arg);
+            throw new IllegalArgumentException(message);
         }
         return true;
     }
@@ -84,7 +86,5 @@ public class ArgsName {
         });
         System.out.println(zip.get("out"));
         ArgsName anotherArgs = ArgsName.of(new String[]{"-Xmx=512", "-=?msg=Exit="});
-
-
     }
 }
