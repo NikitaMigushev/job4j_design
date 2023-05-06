@@ -5,16 +5,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Zip {
-    public void packFiles(List<File> sources, File target) {
+    public void packFiles(List<Path> sources, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
-            for (File source : sources) {
-                zip.putNextEntry(new ZipEntry(source.getPath()));
-                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
+            for (Path source : sources) {
+                zip.putNextEntry(new ZipEntry(source.toString()));
+                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source.toFile()))) {
                     zip.write(out.readAllBytes());
                 }
             }
@@ -44,21 +43,15 @@ public class Zip {
         validateArgs(args);
         Zip zip = new Zip();
         ArgsName zipArgs = ArgsName.of(args);
-        Path root = Paths.get("d");
+        Path root = Path.of(zipArgs.get("d"));
         String exclude = zipArgs.get("e");
         String output = zipArgs.get("o");
         System.out.println("Directory is: " + zipArgs.get("d"));
         System.out.println("Exclude: " + zipArgs.get("e"));
         System.out.println("Save zip to: " + zipArgs.get("o"));
-        List<File> files = convertPathToFile(Search.search(root, p -> !p.toFile().getName().endsWith(exclude)));
-        zip.packFiles(files, new File(output));
+        List<Path> paths = Search.search(root, p -> !p.toFile().getName().endsWith(exclude));
+        zip.packFiles(paths, new File(output));
 
-    }
-
-    private static List<File> convertPathToFile(List<Path> paths) {
-        return paths.stream()
-                .map(Path::toFile)
-                .collect(Collectors.toList());
     }
 
     public static void validateArgs(String[] args) {
@@ -67,10 +60,10 @@ public class Zip {
             throw new IllegalArgumentException("Program arguments are missing. First argument is Directory folder to be archived. "
                     + "Second is file extension to be excluded. Third argument is file to archive to");
         }
-        if (zipArgs.get("d") == null || !Files.isDirectory(Paths.get(zipArgs.get("d")))) {
+        if (!Files.isDirectory(Paths.get(zipArgs.get("d")))) {
             throw new IllegalArgumentException("Directory folder to be archived is invalid");
         }
-        if (zipArgs.get("o") == null) {
+        if (!zipArgs.get("o").endsWith(".zip")) {
             throw new IllegalArgumentException("Filename to archive to is invalid");
         }
     }
