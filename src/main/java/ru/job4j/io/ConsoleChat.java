@@ -12,6 +12,8 @@ public class ConsoleChat {
     private final String path;
     private final String botAnswers;
 
+    private Random random = new Random();
+
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
         this.botAnswers = botAnswers;
@@ -23,25 +25,24 @@ public class ConsoleChat {
         List<String> log = new ArrayList<>();
         boolean exitChat = false;
         boolean botIsActive = true;
-
         System.out.println("Добро пожаловать в консольный чат!");
         while (!exitChat) {
             System.out.print("Вы: ");
             String userInput = scanner.nextLine();
             log.add(getCurrentTimeStamp() + " Вы: " + userInput);
-            if (userInput.equals(OUT)) {
+            if (OUT.equals(userInput)) {
                 System.out.println("До встречи!");
                 saveLog(log);
                 exitChat = true;
-            } else if (userInput.equals(STOP)) {
+            } else if (STOP.equals(userInput)) {
                 botIsActive = false;
                 System.out.println("ЧатБот: ответы ЧатБота деактивированы");
-            } else if (userInput.equals(CONTINUE)) {
+            } else if (CONTINUE.equals(userInput)) {
                 botIsActive = true;
                 System.out.println("ЧатБот: ответы ЧатБота активированы");
             } else {
                 if (botIsActive) {
-                    String botAnwer = botPhrases.get(new Random().nextInt(botPhrases.size()));
+                    String botAnwer = botPhrases.get(random.nextInt(botPhrases.size()));
                     System.out.println("ЧатБот: " + botAnwer);
                     log.add(getCurrentTimeStamp() + " ЧатБот: " + botAnwer);
                 }
