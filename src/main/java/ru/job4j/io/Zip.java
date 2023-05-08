@@ -54,7 +54,7 @@ public class Zip {
 
     }
 
-    public static void validateArgs(String[] args) {
+    private static void validateArgs(String[] args) {
         ArgsName zipArgs = ArgsName.of(args);
         if (args.length < 3) {
             throw new IllegalArgumentException("Program arguments are missing. First argument is Directory folder to be archived. "
