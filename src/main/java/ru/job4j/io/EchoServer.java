@@ -26,7 +26,7 @@ public class EchoServer {
                     if (matcher.find()) {
                         String message = matcher.group(1);
                         if ("Bye".equals(message)) {
-                            out.write("Server is shutting down. Bye!!".getBytes(StandardCharsets.UTF_8));
+                            out.write("Server is shutting down. Bye!".getBytes(StandardCharsets.UTF_8));
                             out.flush();
                             server.close();
                         }
