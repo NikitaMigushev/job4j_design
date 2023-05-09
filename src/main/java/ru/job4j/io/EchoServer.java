@@ -25,16 +25,21 @@ public class EchoServer {
                     Matcher matcher = pattern.matcher(requestLine);
                     if (matcher.find()) {
                         String message = matcher.group(1);
-                        if ("Bye".equals(message)) {
-                            out.write("Server is shutting down. Bye!!".getBytes(StandardCharsets.UTF_8));
+                        if ("Exit".equals(message)) {
+                            out.write("Server is shutting down. Bye!".getBytes(StandardCharsets.UTF_8));
                             out.flush();
                             server.close();
                         }
+                         else if ("Hello".equals(message)) {
+                            out.write("Hello".getBytes(StandardCharsets.UTF_8));
+                        }
+                        else if ("What".equals(message)) {
+                            out.write("What".getBytes(StandardCharsets.UTF_8));
+                        } else {
+                            out.write(matcher.group(1).getBytes(StandardCharsets.UTF_8));
+                        }
+                        out.flush();
                     }
-                    for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
-                        System.out.println(str);
-                    }
-                    out.flush();
                 }
             }
         }
