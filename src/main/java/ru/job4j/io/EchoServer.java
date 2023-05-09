@@ -29,11 +29,9 @@ public class EchoServer {
                             out.write("Server is shutting down. Bye!".getBytes(StandardCharsets.UTF_8));
                             out.flush();
                             server.close();
-                        }
-                         else if ("Hello".equals(message)) {
+                        } else if ("Hello".equals(message)) {
                             out.write("Hello".getBytes(StandardCharsets.UTF_8));
-                        }
-                        else if ("What".equals(message)) {
+                        } else if ("What".equals(message)) {
                             out.write("What".getBytes(StandardCharsets.UTF_8));
                         } else {
                             out.write(matcher.group(1).getBytes(StandardCharsets.UTF_8));
