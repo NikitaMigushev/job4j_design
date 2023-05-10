@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<employee name="John Doe" age="24" employed="false">
+    <contact phone = "111-11-11"/>
+    <skills>
+        <skill>"Java"</skill>
+        <skill>"SQL"</skill>
+        <skill>"JS"</skill>
+        <skill>"Design Pattern"</skill>
+        <skill>"Microservices"</skill>
+        <skill>"Rest API"</skill>
+        <skill>"Hibernate"</skill>
+        <skill>"Spring"</skill>
+        <skill>"Kafka"</skill>
+        <skill>"Maven"</skill>
+        <skill>"Gradle"</skill>
+        <skill>"Docker"</skill>
+        <skill>"Git"</skill>
+    </skills>
+</employee>
