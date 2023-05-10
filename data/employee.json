@@ -1,0 +1,11 @@
+{
+  "name": "John Doe",
+  "employed": false,
+  "age": 24,
+  "contact": {
+    "phone": "111-11-11"
+  },
+  "skills": ["Java", "SQL", "JS", "Design Pattern",
+    "Microservices", "Rest API", "Hibername", "Spring",
+    "Kafka", "Maven", "Gradle", "Docker", "Git"]
+}
