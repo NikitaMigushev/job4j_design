@@ -1,0 +1,18 @@
+Based on given parameters:
+Root: ./
+SearchQuery: ^Search
+SearchType: regex
+Output file: ./data/searchResult.txt
+These files have been found
+.\src\main\java\ru\job4j\filesearch\Search.java
+.\src\main\java\ru\job4j\filesearch\SearchFiles.java
+.\src\main\java\ru\job4j\io\Search.java
+.\src\main\java\ru\job4j\io\SearchFiles.java
+.\target\classes\ru\job4j\filesearch\Search.class
+.\target\classes\ru\job4j\filesearch\SearchFiles.class
+.\target\classes\ru\job4j\io\Search.class
+.\target\classes\ru\job4j\io\SearchFiles.class
+.\target\site\jacoco\ru.job4j.io\Search.html
+.\target\site\jacoco\ru.job4j.io\Search.java.html
+.\target\site\jacoco\ru.job4j.io\SearchFiles.html
+.\target\site\jacoco\ru.job4j.io\SearchFiles.java.html
