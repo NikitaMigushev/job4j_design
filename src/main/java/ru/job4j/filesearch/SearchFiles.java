@@ -18,7 +18,6 @@ public class SearchFiles implements FileVisitor<Path> {
     public SearchFiles(String searchQuery, String searchType) {
         this.searchQuery = searchQuery;
         this.searchType = searchType;
-
     }
 
     public List<Path> getPaths() {
