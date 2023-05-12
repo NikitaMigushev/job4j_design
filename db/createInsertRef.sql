@@ -13,7 +13,7 @@ create table people(
 create table passport(
 	id serial primary key,
 	passport_id int,
-	people_id int references people(id)
+	people_id int references people(id) unique
 );
 
 
