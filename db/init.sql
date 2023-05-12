@@ -1,0 +1,2 @@
+CREATE systemdb
+WITH ENCODING = 'UTF8';
