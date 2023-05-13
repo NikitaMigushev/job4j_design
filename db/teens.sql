@@ -1,6 +1,7 @@
 CREATE TYPE gender AS ENUM ('M', 'F');
 
 create table teens (
+    id serial primary key,
 	name text,
 	gender gender
 );
