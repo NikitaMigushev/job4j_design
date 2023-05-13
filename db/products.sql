@@ -14,8 +14,8 @@ create table product (
 
 insert into type (name) values
 	('СЫР'),
-	('МОЛОКО');
- ('МОРОЖЕНОЕ')
+	('МОЛОКО')
+ 	('МОРОЖЕНОЕ');
 
 insert into product (name, type_id, expired_date, price) values
     ('Сыр плавленный', 1, '2023.06.01', 100),
@@ -53,7 +53,9 @@ where p.name like '%мороженое%';
 select * from product as p
 where p.expired_date < current_date;
 
-select max(p.price) from product as p;
+select * from product
+where price = (select max(price) from product);
+
 
 select t.name, count(p.name) from type as t
 join product as p on p.type_id = t.id
