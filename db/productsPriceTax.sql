@@ -16,7 +16,7 @@ $$
     BEGIN
         update products
         set price_w_tax = price_wo_tax * (1 + 0.2)
-        where id = (select id from inserted);
+        where id in (select id from inserted);
         return new;
     END;
 $$
