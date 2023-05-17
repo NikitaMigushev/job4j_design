@@ -79,3 +79,14 @@ create trigger insert_product_trigger
 
 insert into products (name, producer, count, price_wo_tax) values
 ('Product_BBB', 'Producer_CCC', 140, 75);
+
+create or replace procedure insert_data(i_name varchar, prod varchar, i_count integer, i_price_wo_tax integer)
+language 'plpgsql'
+as $$
+	begin
+	insert into products (name, producer, count, price_wo_tax)
+	values (i_name, prod, i_count, i_price_wo_tax);
+	end
+$$;
+
+call insert_data('product_2', 'producer_2', 15, 32);
