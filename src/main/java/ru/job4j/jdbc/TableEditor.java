@@ -37,54 +37,42 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public void createTable(String tableName) {
+    private void executeStatement(String query) {
         try (Statement statement = connection.createStatement()) {
-            String query = String.format("CREATE TABLE %s (id SERIAL PRIMARY KEY)", tableName);
             statement.executeUpdate(query);
-            System.out.println(String.format("Table %s has been created", tableName));
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void createTable(String tableName) {
+        String query = String.format("CREATE TABLE %s (id SERIAL PRIMARY KEY)", tableName);
+        executeStatement(query);
+        System.out.println(String.format("Table %s has been created", tableName));
     }
 
     public void dropTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
-            String query = String.format("DROP TABLE %s", tableName);
-            statement.executeUpdate(query);
-            System.out.println(String.format("Table %s has been deleted", tableName));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String query = String.format("DROP TABLE %s", tableName);
+        executeStatement(query);
+        System.out.println(String.format("Table %s has been deleted", tableName));
     }
 
     public void addColumn(String tableName, String columnName, String type) {
-        try (Statement statement = connection.createStatement()) {
-            String query = String.format("ALTER TABLE %s ADD COLUMN %s %s", tableName, columnName, type);
-            statement.executeUpdate(query);
-            System.out.println(String.format("Column %s has been added into table %n", columnName, tableName));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String query = String.format("ALTER TABLE %s ADD COLUMN %s %s", tableName, columnName, type);
+        executeStatement(query);
+        System.out.println(String.format("Column %s has been added into table %n", columnName, tableName));
     }
 
     public void dropColumn(String tableName, String columnName) {
-        try (Statement statement = connection.createStatement()) {
-            String query = String.format("ALTER TABLE %s DROP COLUMN %s", tableName, columnName);
-            statement.executeUpdate(query);
-            System.out.println(String.format("Column %s has been removed from table %s", columnName, tableName));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String query = String.format("ALTER TABLE %s DROP COLUMN %s", tableName, columnName);
+        executeStatement(query);
+        System.out.println(String.format("Column %s has been removed from table %s", columnName, tableName));
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        try (Statement statement = connection.createStatement()) {
-            String query = String.format("ALTER TABLE %s RENAME COLUMN %s TO %s", tableName, columnName, newColumnName);
-            statement.executeUpdate(query);
-            System.out.println(String.format("Column %s has been renamed to %s in table %s", columnName, newColumnName, tableName));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String query = String.format("ALTER TABLE %s RENAME COLUMN %s TO %s", tableName, columnName, newColumnName);
+        executeStatement(query);
+        System.out.println(String.format("Column %s has been renamed to %s in table %s", columnName, newColumnName, tableName));
     }
 
     public String getTableScheme(String tableName) throws Exception {
@@ -116,7 +104,7 @@ public class TableEditor implements AutoCloseable {
     public static void main(String[] args) {
         TableEditor tableEditor = new TableEditor(new Properties());
         tableEditor.createTable("testtable");
-        tableEditor.addColumn("testtable", "name", "VARCHAR(255)");
+        tableEditor.addColumn("testtable", "name", "text");
         tableEditor.renameColumn("testtable", "name", "fullname");
         tableEditor.dropColumn("testtable", "fullname");
         tableEditor.dropTable("testtable");
