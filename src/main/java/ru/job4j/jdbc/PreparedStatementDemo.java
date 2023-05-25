@@ -21,7 +21,7 @@ public class PreparedStatementDemo {
         connection = DriverManager.getConnection(url, login, password);
     }
 
-    public void insert(City city) {
+    public void insert(CityOld city) {
         try (PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO cities(name, population) VALUES (?, ?)")) {
             statement.setString(1, city.getName());
@@ -32,7 +32,7 @@ public class PreparedStatementDemo {
         }
     }
 
-    public boolean update(City city) {
+    public boolean update(CityOld city) {
         boolean result = false;
         try (PreparedStatement statement =
                 connection.prepareStatement("UPDATE cities SET name = ?, population = ? WHERE id = ?")) {
@@ -46,12 +46,12 @@ public class PreparedStatementDemo {
         return result;
     }
 
-    public List<City> findAll() {
-        List<City> cities = new ArrayList<>();
+    public List<CityOld> findAll() {
+        List<CityOld> cities = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM cities")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    cities.add(new City(
+                    cities.add(new CityOld(
                             resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getInt("population")
