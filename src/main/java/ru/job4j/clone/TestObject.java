@@ -11,7 +11,7 @@ public class TestObject implements Cloneable {
         return testObject;
     }
 
-    public static void main(String[] args) throws CloneNotSupportedException{
+    public static void main(String[] args) throws CloneNotSupportedException {
         TestObject testObj1 = new TestObject();
         testObj1.num = 5;
         InnerObject innerObj = new InnerObject();

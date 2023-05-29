@@ -5,7 +5,7 @@ public class SqMax {
         return left > right ? left : right;
     }
 
-    public static int max (int first, int second, int third, int forth) {
+    public static int max(int first, int second, int third, int forth) {
         return max(
                 max(first, second),
                 max(third, forth)
