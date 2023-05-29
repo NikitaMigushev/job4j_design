@@ -2,17 +2,18 @@ package ru.job4j.kiss;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.BiPredicate;
 
 public class MaxMin {
     public <T> T max(List<T> values, Comparator<T> comparator) {
-        return findExtremeValue(values, comparator, (current, extreme) -> comparator.compare(current, extreme) > 0);
+        return findExtremeValue(values, (current, extreme) -> comparator.compare(current, extreme) > 0);
     }
 
     public <T> T min(List<T> values, Comparator<T> comparator) {
-        return findExtremeValue(values, comparator, (current, extreme) -> comparator.compare(current, extreme) < 0);
+        return findExtremeValue(values, (current, extreme) -> comparator.compare(current, extreme) < 0);
     }
 
-    private <T> T findExtremeValue(List<T> values, Comparator<T> comparator, BiPredicate<T, T> condition) {
+    private <T> T findExtremeValue(List<T> values, BiPredicate<T, T> condition) {
         if (values.isEmpty()) {
             throw new IllegalArgumentException("List cannot be empty");
         }
@@ -25,9 +26,5 @@ public class MaxMin {
             }
         }
         return extreme;
-    }
-    @FunctionalInterface
-    private interface BiPredicate<T, U> {
-        boolean test(T t, U u);
     }
 }
