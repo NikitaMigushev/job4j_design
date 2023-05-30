@@ -20,19 +20,29 @@ public class SalaryConverterReportTest {
         MemStore store = new MemStore();
         CurrencyConverter currencyConverter = new InMemoryCurrencyConverter();
         Calendar now = Calendar.getInstance();
-        Employee worker = new Employee("Ivan", now, now, 100);
+        Employee workerA = new Employee("Ivan", now, now, 100);
+        Employee workerB = new Employee("Petr", now, now, 200);
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
-        store.add(worker);
+        store.add(workerA);
+        store.add(workerB);
         Report report = new SalaryConverterReport(store, currencyConverter, parser);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary (RUB); Salary (USD); Salary (EUR)")
                 .append(System.lineSeparator())
                 .append(String.format("Ivan %s %s %s %s %s",
-                        parser.parse(worker.getHired()),
-                        parser.parse(worker.getFired()),
-                        worker.getSalary(),
-                        currencyConverter.convert(Currency.RUB, worker.getSalary(), Currency.USD),
-                        currencyConverter.convert(Currency.RUB, worker.getSalary(), Currency.EUR)
+                        parser.parse(workerA.getHired()),
+                        parser.parse(workerA.getFired()),
+                        workerA.getSalary(),
+                        currencyConverter.convert(Currency.RUB, workerA.getSalary(), Currency.USD),
+                        currencyConverter.convert(Currency.RUB, workerA.getSalary(), Currency.EUR)
+                ))
+                .append(System.lineSeparator())
+                .append(String.format("Petr %s %s %s %s %s",
+                        parser.parse(workerB.getHired()),
+                        parser.parse(workerB.getFired()),
+                        workerB.getSalary(),
+                        currencyConverter.convert(Currency.RUB, workerB.getSalary(), Currency.USD),
+                        currencyConverter.convert(Currency.RUB, workerB.getSalary(), Currency.EUR)
                 ))
                 .append(System.lineSeparator());
         assertThat(report.generate(em -> true)).isEqualTo(expect.toString());
