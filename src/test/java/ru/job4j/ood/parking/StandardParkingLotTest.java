@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StandardParkingLotTest {
     ParkingLot parkingLot;
@@ -84,4 +85,20 @@ class StandardParkingLotTest {
         assertThat(truckC.isParked()).isFalse();
         assertThat(parkingLot.getVehicles()).doesNotContain(truckC);
     }
+
+    @Test
+    void whenCreateTruckSameSizeAsCar() {
+        assertThatThrownBy(() -> {
+            new Truck(1, 1);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenTruckSizeZero() {
+        assertThatThrownBy(() -> {
+            new Truck(1, 0);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+
 }
