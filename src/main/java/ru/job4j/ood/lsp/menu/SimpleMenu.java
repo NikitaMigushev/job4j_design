@@ -46,8 +46,6 @@ public class SimpleMenu implements Menu {
         };
     }
 
-
-
     private Optional<ItemInfo> findItem(String name) {
         Iterator<ItemInfo> iterator = new DFSIterator();
         while (iterator.hasNext()) {
