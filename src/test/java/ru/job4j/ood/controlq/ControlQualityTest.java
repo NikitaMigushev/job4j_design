@@ -85,4 +85,24 @@ class ControlQualityTest {
         assertThat(mango.getDiscount()).isEqualTo(50);
         assertThat(stores.get(2).getFoods()).contains(kiwi);
     }
+    @Test
+    public void testResort() {
+        Food watermelon = new Food("Watermelon", LocalDate.now().plusDays(20), LocalDate.now(), 100, 0);
+        Food apple = new Food("Apple", LocalDate.now().plusDays(10), LocalDate.now().minusDays(10), 100, 0);
+        Food mango = new Food("Mango", LocalDate.now().plusDays(3), LocalDate.now().minusDays(10), 100, 0);
+        Food kiwi = new Food("Kiwi", LocalDate.now().minusDays(5), LocalDate.now().minusDays(1), 100, 0);
+        foods.add(watermelon);
+        foods.add(apple);
+        foods.add(mango);
+        foods.add(kiwi);
+        controlQuality.distributeFood(foods);
+        controlQuality.resort();
+        assertThat(stores.get(0).getFoods()).contains(watermelon);
+        assertThat(stores.get(1).getFoods()).contains(apple);
+        assertThat(apple.getDiscount()).isEqualTo(0);
+        assertThat(stores.get(1).getFoods()).contains(mango);
+        assertThat(mango.getDiscount()).isEqualTo(50);
+        assertThat(stores.get(2).getFoods()).contains(kiwi);
+
+    }
 }

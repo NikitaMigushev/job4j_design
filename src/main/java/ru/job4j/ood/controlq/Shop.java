@@ -27,4 +27,13 @@ public class Shop extends AbstractStore {
     public List<Food> getFoods() {
         return foods;
     }
+
+    @Override
+    public void removeFood(Food food) {
+        foods.remove(food);
+    }
+    @Override
+    public void removeAllFood() {
+        foods.clear();
+    }
 }

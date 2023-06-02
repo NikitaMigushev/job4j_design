@@ -1,5 +1,6 @@
 package ru.job4j.ood.controlq;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControlQuality {
@@ -19,5 +20,14 @@ public class ControlQuality {
                 }
             }
         }
+    }
+    public void resort() {
+        List<Food> allFoods = new ArrayList<>();
+        for (AbstractStore store : stores) {
+            List<Food> foods = store.getFoods();
+            allFoods.addAll(foods);
+            store.removeAllFood();
+        }
+        distributeFood(allFoods);
     }
 }
