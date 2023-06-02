@@ -34,7 +34,7 @@ class StandardParkingLotTest {
     }
 
     @Test
-    void whenBigTruckOccupiesCarSlot() {
+    void whenBigTruckOccupiesTruckSlot() {
         Vehicle truck = new Truck(1, 10);
         truck.park(parkingLot);
         assertThat(parkingLot.getVehicles()).contains(truck);

@@ -34,7 +34,6 @@ public class StandardParkingLot implements ParkingLot {
                 index = i;
                 break;
             }
-
         }
         return index;
     }
