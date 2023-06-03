@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract class AbstractStore implements Store {
-    private List<Food> foods = new ArrayList<>();
+    protected List<Food> foods = new ArrayList<>();
 
     public void addFood(Food food) {
         foods.add(food);
@@ -16,4 +16,14 @@ abstract class AbstractStore implements Store {
     }
 
     public abstract boolean accept(Food food, double freshnessPercentage);
+
+    @Override
+    public void removeFood(Food food) {
+        foods.remove(food);
+    }
+
+    @Override
+    public void removeAllFood() {
+        foods.clear();
+    }
 }
