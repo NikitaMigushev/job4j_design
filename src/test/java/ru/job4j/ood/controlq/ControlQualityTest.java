@@ -64,7 +64,7 @@ class ControlQualityTest {
         Food apple = new Food("Apple", expiryDate, createDate, 100, 0);
         foods.add(apple);
         controlQuality.distributeFood(foods);
-        assertThat(stores.get(2).getFoods()).contains(apple);
+        assertThat(stores.get(2).getFoods()).isEmpty();
     }
 
     @Test
@@ -83,7 +83,7 @@ class ControlQualityTest {
         assertThat(apple.getDiscount()).isEqualTo(0);
         assertThat(stores.get(1).getFoods()).contains(mango);
         assertThat(mango.getDiscount()).isEqualTo(50);
-        assertThat(stores.get(2).getFoods()).contains(kiwi);
+        assertThat(stores.get(2).getFoods()).isEmpty();
     }
     @Test
     public void testResort() {
@@ -102,7 +102,6 @@ class ControlQualityTest {
         assertThat(apple.getDiscount()).isEqualTo(0);
         assertThat(stores.get(1).getFoods()).contains(mango);
         assertThat(mango.getDiscount()).isEqualTo(50);
-        assertThat(stores.get(2).getFoods()).contains(kiwi);
-
+        assertThat(stores.get(2).getFoods()).isEmpty();
     }
 }

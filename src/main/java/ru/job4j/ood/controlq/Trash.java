@@ -18,6 +18,7 @@ public class Trash extends AbstractStore {
     @Override
     public void addFood(Food food) {
         foods.add(food);
+        foods.remove(food);
     }
 
     @Override
