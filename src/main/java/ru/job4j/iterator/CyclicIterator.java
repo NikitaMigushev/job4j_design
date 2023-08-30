@@ -23,8 +23,11 @@ public class CyclicIterator<T>  implements Iterator<T> {
         if (data.isEmpty()) {
             throw new NoSuchElementException("Iterator is empty");
         }
+        if (index > data.size() - 1) {
+            index = 0;
+        }
         T element = data.get(index);
-        index = (index + 1) % data.size();
+        index++;
         return element;
     }
 }
